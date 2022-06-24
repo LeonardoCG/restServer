@@ -1,12 +1,15 @@
 // importamos express 
 const express = require('express');
 
+const cors = require('cors');
+
 class Server {
 
     constructor() {
 
         this.app = express();
         this.port = process.env.PORT;
+        this.usersPath = '/api/users';
 
         //Middlewares
         this.middlewares();
@@ -16,50 +19,30 @@ class Server {
 
     }
 
+
+
+    //    MIDDLEWARES
     middlewares() {
-        //direcctorio publico
+        //cors
+        this.app.use( cors() );
+
+        //lectura y parseo del body
+        this.app.use( express.json() );
+
+        //direcctorio publico statico
         this.app.use( express.static('public') );
+        
     }
 
-
-    //Route || endpoint
     routes() {
 
-        this.app.get('/api',  (req, res) => {
-            res.json({
-                msg: 'get API'
-            });
-        });
-
-        this.app.put('/api', (req, res) => {
-            res.json({
-                msg: 'put api'
-            });
-        });
-
-        this.app.post('/api', (req, res) => {
-            res.json({
-                msg: 'post api'
-            });
-        });
-
-        this.app.delete('/api', (req, res) => {
-            res.json({
-                msg: 'delete api'
-            });
-        });
-
-        this.app.patch('/api', (req, res) => {
-            res.json({
-                msg: 'patch api'
-            });
-        });
+        this.app.use(this.usersPath, require('../routes/users.routes'));
     }
 
     listen() {
 
         this.app.listen( this.port, (req, res) => {
-            console.log(`server ejecutando en ${this.port}`)
+            console.log(`servidor web habilitado para CORS escuchando en el puerto  ${this.port}`)
         });
     }
 
