@@ -1,53 +1,60 @@
-// importamos express 
 const express = require('express');
-
 const cors = require('cors');
+
+const { dbConnection } = require('../database/config');
 
 class Server {
 
     constructor() {
-
-        this.app = express();
+        this.app  = express();
         this.port = process.env.PORT;
-        this.usersPath = '/api/users';
 
-        //Middlewares
+        this.usuariosPath = '/api/usuarios';
+        this.authPath     = '/api/auth';
+        // Conectar a base de datos
+        this.conectarDB();
+
+        // Middlewares
         this.middlewares();
 
-        //Routes
+        // Rutas de mi aplicación
         this.routes();
+    }
 
+    async conectarDB() {
+        await dbConnection();
     }
 
 
-
-    //    MIDDLEWARES
     middlewares() {
-        //cors
+
+        // CORS
         this.app.use( cors() );
 
-        //lectura y parseo del body
+        // Lectura y parseo del body
         this.app.use( express.json() );
 
-        //direcctorio publico statico
+        // Directorio Público
         this.app.use( express.static('public') );
-        
+
     }
 
     routes() {
+        
+        this.app.use( this.authPath, require('../routes/auth'));
+        this.app.use( this.usuariosPath, require('../routes/usuarios'));
 
-        this.app.use(this.usersPath, require('../routes/users.routes'));
     }
 
     listen() {
-
-        this.app.listen( this.port, (req, res) => {
-            console.log(`servidor web habilitado para CORS escuchando en el puerto  ${this.port}`)
+        this.app.listen( this.port, () => {
+            console.log('Servidor corriendo en puerto', this.port );
         });
     }
 
-
 }
+
+
 
 
 module.exports = Server;
