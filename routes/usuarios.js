@@ -2,7 +2,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-
 // Middlewares
 const { validarCampos, 
         validarJWT, 
@@ -19,7 +18,6 @@ const { usuariosGet,
         usuariosPatch } = require('../controllers/usuarios');
 //routes
 const router = Router();
-
 
 router.get('/', usuariosGet );
 
@@ -50,9 +48,5 @@ router.delete('/:id',[
 ],usuariosDelete );
 
 router.patch('/', usuariosPatch );
-
-
-
-
 
 module.exports = router;

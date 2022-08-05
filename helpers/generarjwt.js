@@ -1,7 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { PromiseProvider } = require('mongoose');
-
-
 
 const generarJWT = ( uid = '' ) => {
 
@@ -23,8 +20,6 @@ const generarJWT = ( uid = '' ) => {
         });
     });
 }
-
-
 
 module.exports = {
     generarJWT

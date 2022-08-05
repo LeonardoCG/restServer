@@ -26,7 +26,7 @@ const ProductoSchema = Schema({
     categoria: {
         type: Schema.Types.ObjectId,
         ref: 'Categoria',
-        require: true
+        required: true
     },
     descripcion: {
         type: String,

@@ -30,9 +30,17 @@ const existeUsuarioPorId = async( id ) => {
 
 //validador de categorias por id
 const existeCategoriaPorId = async( id ) => {
-    // Verificar si el correo existe
+    // Verificar si la categoria existe
     const existeCategoria = await categoria.findById(id);
     if( !existeCategoria ) {
+        throw new Error(`El id no existe ${ id }`);
+    }
+}
+
+const existeProductoPorId = async( id ) => {
+    //verificar si existe el producto
+    const existeProducto = await producto.findById(id);
+    if(!existeProducto) {
         throw new Error(`El id no existe ${ id }`);
     }
 }
@@ -43,6 +51,7 @@ module.exports = {
     esRoleValido,
     emailExiste,
     existeUsuarioPorId,
-    existeCategoriaPorId
+    existeCategoriaPorId,
+    existeProductoPorId
 }
 

@@ -20,7 +20,6 @@ const CategoriaSchema = Schema({
     }
 });
 
-
 CategoriaSchema.methods.toJSON = function() {
     //excluid __V, password, _id
     const { __v, estado, ...data  } = this.toObject();
