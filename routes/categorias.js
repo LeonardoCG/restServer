@@ -12,7 +12,7 @@ const {existeCategoriaPorId } = require('../helpers/db-validators');
 //middlewars
 const { validarJWT, 
         validarCampos, 
-        esAdminRole} = require('../middlewares');
+        esAdminRole } = require('../middlewares');
 //routes
 const router = Router();
 

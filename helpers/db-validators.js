@@ -1,6 +1,5 @@
-const categoria = require('../models/categoria');
-const Role = require('../models/role');
-const Usuario = require('../models/usuario');
+const { Usuario, Categoria, Producto, Role } = require("../models");
+
 
 const esRoleValido = async(role = '') => {
     //VERIFICAR SI EXISTE EL ROLE
@@ -31,7 +30,7 @@ const existeUsuarioPorId = async( id ) => {
 //validador de categorias por id
 const existeCategoriaPorId = async( id ) => {
     // Verificar si la categoria existe
-    const existeCategoria = await categoria.findById(id);
+    const existeCategoria = await Categoria.findById(id);
     if( !existeCategoria ) {
         throw new Error(`El id no existe ${ id }`);
     }
@@ -39,7 +38,7 @@ const existeCategoriaPorId = async( id ) => {
 
 const existeProductoPorId = async( id ) => {
     //verificar si existe el producto
-    const existeProducto = await producto.findById(id);
+    const existeProducto = await Producto.findById(id);
     if(!existeProducto) {
         throw new Error(`El id no existe ${ id }`);
     }

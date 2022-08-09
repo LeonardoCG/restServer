@@ -1,11 +1,13 @@
 const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 //Modelo
-const Usuario = require('../models/usuario');
+const { Usuario } = require('../models');
+
 
 const usuariosGet = async(req = request, res = response) => {
 
     const { limite = 5, desde = 0 } = req.query;
+    //usuario activdo
     const query = { estado: true };
 
     //coleccion de dos promesas
