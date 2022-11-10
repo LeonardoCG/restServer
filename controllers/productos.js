@@ -16,11 +16,8 @@ const productsGet = async (req, res = response) => {
             .populate("categoria", "nombre")
             .skip(Number(desde))
             .limit(Number(limite))
-<<<<<<< HEAD
             .populate("usuario", "nombre")
             .populate("categoria", "nombre")
-=======
->>>>>>> 879270b4b35ffec7809d13c69e011a38f05e218f
     ]);
 
     res.json({ total, productos });
@@ -41,11 +38,7 @@ const productGet = async (req, res = response) => {
 const productCreate = async (req, res = response) => {
 
     const { estado, usuario, ...body } = req.body;
-<<<<<<< HEAD
     const nombre = req.body.nombre;
-=======
-    const { nombre } = req.body.nombre;
->>>>>>> 879270b4b35ffec7809d13c69e011a38f05e218f
 
     const productoDB = await Producto.findOne(nombre)
 
@@ -76,16 +69,9 @@ const productUpdate = async (req, res = response) => {
     const { id } = req.params;
     const { estado, usuario, categoria, ...data } = req.body;
 
-<<<<<<< HEAD
     if (data.nombre) {
         data.nombre = data.nombre.toUpperCase();
     }
-=======
-    if( data.nombre ) {
-        data.nombre = data.nombre.toUpperCase();
-    }
-
->>>>>>> 879270b4b35ffec7809d13c69e011a38f05e218f
     data.usuario = req.usuario._id;
 
     const producto = await Producto.findByIdAndUpdate(id, data, { new: true });
@@ -96,11 +82,7 @@ const productUpdate = async (req, res = response) => {
 const productDelete = async (req, res = response) => {
     const { id } = req.params;
 
-<<<<<<< HEAD
     const producto = await Producto.findByIdAndUpdate(id, { estado: false }, { new: true });
-=======
-    const productoborrado = await Producto.findByIdAndUpdate(id, { estado: false }, { new: true });
->>>>>>> 879270b4b35ffec7809d13c69e011a38f05e218f
 
     res.json(productoborrado);
 
