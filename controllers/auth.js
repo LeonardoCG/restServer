@@ -35,7 +35,7 @@ const login = async (req, res = response) => {
         const token = await generarJWT(usuario.id);
 
 
-        res.json({
+        return res.json({
             // msg: 'Login ok'
             usuario,
             token
@@ -43,7 +43,7 @@ const login = async (req, res = response) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             msg: 'Hable con el administrador'
         });
     }
@@ -91,14 +91,14 @@ const googleSingIn = async (req, res = response) => {
 
 
 
-        res.json({
+        return res.json({
             usuario,
             token
         });
 
     } catch (error) {
 
-        res.status(400).json({
+        return res.status(400).json({
             ok: false,
             msg: 'El Token no se pudo verificar'
         });

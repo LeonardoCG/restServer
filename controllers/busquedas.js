@@ -32,7 +32,7 @@ const buscarUsuarios = async( termino = '', res = response ) => {
         Usuario.count( buscar),
         Usuario.find(buscar)
         ]);
-    res.json({
+        return res.json({
         total,
         results: usuarios
     });
@@ -43,7 +43,7 @@ const buscarCategorias = async(termino = '', res = response ) => {
     const esMongoID = ObjectId.isValid( termino ) // true
     if( esMongoID && termino.length == 24 ) {
         const categoria =  await Categoria.findById( termino );
-        res.json({
+        return res.json({
             results: (categoria) ? [ categoria] : []
         });
     }
@@ -56,7 +56,7 @@ const buscarCategorias = async(termino = '', res = response ) => {
         Categoria.count( buscarCategorias),
         Categoria.find(buscarCategorias)
     ]);
-    res.json({
+    return res.json({
         totalCat,
         categorias
     });
@@ -68,7 +68,7 @@ const buscarProductos = async(termino = '', res = response ) => {
      const esMongoID = ObjectId.isValid( termino ) // true
      if( esMongoID && termino.length == 24 ) {
          const categoria =  await Categoria.findById( termino );
-         res.json({
+         return res.json({
              results: (categoria) ? [ categoria] : []
          });
      }
@@ -81,7 +81,7 @@ const buscarProductos = async(termino = '', res = response ) => {
          Categoria.count( buscarCategorias),
          Categoria.find(buscarCategorias)
      ]);
-     res.json({
+     return res.json({
          totalCat,
          categorias
      });
@@ -113,10 +113,9 @@ const busquedas = (req, res = response) => {
 
         break;
         default:
-            res.status(500).json({
+            return res.status(500).json({
                 msg: 'se olvido hacer esta busqueda'
             })
-        break;
     }
 
 

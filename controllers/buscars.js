@@ -1,12 +1,12 @@
 const { response } = require("express");
 
-
 const coleccionesPermitidas = [
     'usuarios',
     'categoria',
     'productos',
     'roles'
 ];
+
 
 
 const buscar = (req, res = response) => {
@@ -16,13 +16,12 @@ const buscar = (req, res = response) => {
     if( !coleccionesPermitidas.includes( coleccion ) ) {
         return res.status(400).json({
             msg: `Las coleccones permitidas son: ${ coleccionesPermitidas }`
-        });
+        })
 
     }
 
-    switch (key) {
+    switch (coleccion) {
         case 'usuarios':
-            
             break;
         case 'categoria':
 
@@ -34,15 +33,15 @@ const buscar = (req, res = response) => {
 
             break;
         default:
-            res.status(500).json({
+            return res.status(500).json({
                 msg: 'Se le olvido hacer esta busqueda'
-            });
+            })
             break;
     }
 
-    res.json({
+    return res.json({
         coleccion, termino
-    });
+    })
 
 }
 

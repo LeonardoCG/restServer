@@ -18,7 +18,7 @@ const usuariosGet = async(req = request, res = response) => {
             .limit(Number( limite ))
     ]);
 
-    res.json({
+    return res.json({
         total,
         usuarios
     });
@@ -36,7 +36,7 @@ const usuariosPost = async(req, res = response) => {
     // Guardar en BD
     await usuario.save();
 
-    res.json({
+    return res.json({
         usuario
     });
 }
@@ -54,7 +54,7 @@ const usuariosPut = async(req, res = response) => {
 
     const usuario = await Usuario.findByIdAndUpdate( id, resto );
 
-    res.json(usuario);
+    return res.json(usuario);
 }
 
 const usuariosPatch = (req, res = response) => {
@@ -73,7 +73,7 @@ const usuariosDelete = async(req, res = response) => {
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false } );
     const usuarioAutenticado = req.usuario;
 
-    res.json({usuario, usuarioAutenticado});
+    return res.json({usuario, usuarioAutenticado});
 }
 
 
