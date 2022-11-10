@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 // Middlewares
 const { validarCampos, 
         validarJWT, 
-        validarTieneRole} = require('../middlewares/index');
+        validarTieneRole } = require('../middlewares');
 //helpers
 const { esRoleValido, 
         emailExiste, 

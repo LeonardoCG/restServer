@@ -1,6 +1,6 @@
 const { response } = require('express');
 //Modelo
-const Categoria = require('../models/categoria');
+const { Categoria } = require('../models');
 
 // obtenerCategorias - paginado - total - populete
 const categoriasGet = async (req, res = response ) => {
