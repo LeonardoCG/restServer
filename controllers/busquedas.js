@@ -41,7 +41,8 @@ const buscarUsuarios = async( termino = '', res = response ) => {
 const buscarCategorias = async(termino = '', res = response ) => {
     // buscar por ID
     const esMongoID = ObjectId.isValid( termino ) // true
-    if( esMongoID && termino.length == 24 ) {
+
+    if( esMongoID ) {
         const categoria =  await Categoria.findById( termino );
         return res.json({
             results: (categoria) ? [ categoria] : []
@@ -67,23 +68,23 @@ const buscarProductos = async(termino = '', res = response ) => {
      // buscar por ID
      const esMongoID = ObjectId.isValid( termino ) // true
      if( esMongoID && termino.length == 24 ) {
-         const categoria =  await Categoria.findById( termino );
+         const producto =  await Producto.findById( termino );
          return res.json({
-             results: (categoria) ? [ categoria] : []
+             results: (producto) ? [ producto] : []
          });
      }
      const regex = new RegExp( termino, 'i');
-     let buscarCategorias = {
+     let buscarp = {
          $or: [{ nombre : regex }, { estado: true }]
      }
      //coleccion de dos promesas
-     const[totalCat, categorias] = await Promise.all([
-         Categoria.count( buscarCategorias),
-         Categoria.find(buscarCategorias)
+     const[totalCat, productos] = await Promise.all([
+         Producto.count( buscarp),
+         Producto.find(buscarP)
      ]);
      return res.json({
          totalCat,
-         categorias
+         productos
      });
  
 

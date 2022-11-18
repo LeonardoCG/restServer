@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const { dbConnection } = require('../database/config');
+const buscar = require('../controllers/buscars');
 
 class Server {
 
@@ -14,7 +15,8 @@ class Server {
             usuarios:   '/api/usuarios',
             productos: '/api/productos',
             categorias: '/api/categorias',
-            busquedas: '/api/busquedas'
+            busquedas: '/api/busquedas',
+            buscar: '/api/buscar'
         }
 
 
@@ -52,7 +54,8 @@ class Server {
         this.app.use(this.paths.usuarios, require('../routes/usuarios'));
         this.app.use(this.paths.categorias, require('../routes/categorias'));
         this.app.use(this.paths.productos, require('../routes/productos'));
-        this.app.use(this.paths.busquedas, require('../routes/buscar'));
+        this.app.use(this.paths.busquedas, require('../routes/busquedas'));
+        this.app.use(this.paths.buscar, require('../routes/buscar'));
 
     }
 
